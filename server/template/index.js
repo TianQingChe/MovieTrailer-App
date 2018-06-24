@@ -1,5 +1,6 @@
-const normalTemplate = require('./normal')
 
 module.exports = {
-    normal: normalTemplate
+    htmlTemplate: require('./htmlTemplate'),
+    ejsTemplate: require('./ejsTemplate'),
+    pugTemplate: require('./pugTemplate')
 }
