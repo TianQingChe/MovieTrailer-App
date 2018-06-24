@@ -1,12 +1,15 @@
 const Koa = require('koa')
+const views = require('koa-views')
+const { resolve } = require('path')
+
 const app = new Koa()
-const { htmlTemplate, ejsTemplate,pugTemplate } = require('./template')
-// const ejs = require('ejs')
-const pug = require('pug')
+
+app.use(views(resolve(__dirname,'./views'), {
+	extension: 'pug'//指定扩展名，只要是后缀名为pug的文件就会被识别成模板文件
+}))
 
 app.use(async (ctx, next) => {
-	ctx.type = 'text/html; charset=utf-8'
-	ctx.body = pug.render(pugTemplate, {
+	await ctx.render('index', {//index不用加后缀，因为上一段代码指定了模板extension
 		you: 'Luke',
 		me: 'Eric'
 	})
